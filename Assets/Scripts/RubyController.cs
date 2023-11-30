@@ -12,6 +12,11 @@ public class RubyController : MonoBehaviour
     
     public AudioClip throwSound;
     public AudioClip hitSound;
+
+    public GameObject healthVFX;
+    public GameObject damageVFX;
+
+    public GameManagerScript gameManager;
     
     public int health { get { return currentHealth; }}
     int currentHealth;
@@ -19,6 +24,7 @@ public class RubyController : MonoBehaviour
     public float timeInvincible = 2.0f;
     bool isInvincible;
     float invincibleTimer;
+    private bool isDead;
     
     Rigidbody2D rigidbody2d;
     float horizontal;
@@ -82,8 +88,16 @@ public class RubyController : MonoBehaviour
                 }
             }
         }
+
+        if(currentHealth <= 0 && !isDead)
+        {
+            isDead = true;
+            gameObject.SetActive(false);
+            gameManager.gameOver();
+            Debug.Log("Dead");
+        }
     }
-    
+
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
@@ -97,11 +111,13 @@ public class RubyController : MonoBehaviour
     {
         if (amount < 0)
         {
+            animator.SetTrigger("Hit");
             if (isInvincible)
                 return;
             
             isInvincible = true;
             invincibleTimer = timeInvincible;
+            GameObject projectileObject = Instantiate(damageVFX, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             
             PlaySound(hitSound);
         }
@@ -109,6 +125,10 @@ public class RubyController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+        if (amount > 0)
+        {
+            GameObject projectileObject = Instantiate(healthVFX, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        } 
     }
     
     void Launch()

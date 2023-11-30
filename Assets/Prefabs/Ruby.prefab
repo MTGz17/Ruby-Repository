@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5498222355026565102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: -12.71, y: -0.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,6 +106,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 216553610610172887, guid: c599b71907811de4cb79e1f274adb32f, type: 3}
   throwSound: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
   hitSound: {fileID: 8300000, guid: 9b1bb1f450b7d444fa4a8019d13519a7, type: 3}
+  healthVFX: {fileID: 2445283409098257966, guid: fc300815daa7e71438043fc61c4bccac, type: 3}
+  damageVFX: {fileID: 731248459644868648, guid: 0267f12027787cc439ef2a726156abba, type: 3}
+  gameManager: {fileID: 7575561191904375279, guid: 7493f98362a50da4e9dcd39c8bd793be, type: 3}
   timeInvincible: 2
 --- !u!50 &7771343954464877252
 Rigidbody2D:
